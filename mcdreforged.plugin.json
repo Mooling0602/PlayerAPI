@@ -1,0 +1,17 @@
+{
+    "id": "player_api",
+    "version": "0.0.1",
+    "name": "PlayerAPI",
+    "description": {
+        "en_us": "An api to identify players in Minecraft servers.",
+        "zh_cn": "一个识别玩家的API，适用于Minecraft服务器。"
+    },
+    "author": "Mooling0602",
+    "link": "https://github.com/Mooling0602/PlayerAPI-MCDR",
+    "dependencies": {
+        "mcdreforged": ">=2.14.1"
+    },
+    "resources": [
+        "lang"
+    ]
+}
