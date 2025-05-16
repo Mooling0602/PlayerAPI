@@ -29,13 +29,8 @@ class Player:
     service_name: Optional[str] = None
 
     def __post_init__(self):
-        if self.name is None or self.uuid is None:
-            missing = []
-            if self.name is None:
-                missing.append("name")
-            if self.uuid is None:
-                missing.append("uuid")
-            raise TypeError(f"Missing necessary informations: {missing}!")
+        if self.uuid is None and self.name is None:
+            raise TypeError("no necessary given informations!")
         if isinstance(self.uuid, str):
             self.uuid = UUID(self.uuid)
         
@@ -100,8 +95,11 @@ class FloodgatePlayer(OnlinePlayer):
         if not is_from_floodgate(self.uuid):
             raise TypeError("Invalid floodgate player uuid!")
 
-# Testing codes.
-player = OfficialPlayer(name="CleMooling")
-print(player)
-ygg_player = YggdrasilPlayer(name="Mooling0602", api = "https://littleskin.cn/api/yggdrasil")
-print(ygg_player)
+# Test module.
+def test():
+    player = OfficialPlayer(name="CleMooling")
+    print(player)
+    ygg_player = YggdrasilPlayer(name="Mooling0602", api="https://littleskin.cn/api/yggdrasil")
+    print(ygg_player)
+
+# test()
