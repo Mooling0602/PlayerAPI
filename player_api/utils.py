@@ -5,7 +5,11 @@ from typing import Callable, Any
 def execute_if(condition: bool | Callable[[], bool]):
     def decorator(func: Callable) -> Callable:
         def wrapper(*args, **kwargs) -> Any:
-            actual_condition = condition() if callable(condition) else condition
+            actual_condition = None
+            if callable(condition):
+                actual_condition = condition()
+            else:
+                actual_condition = condition
             if actual_condition:
                 return func(*args, **kwargs)
             return None
