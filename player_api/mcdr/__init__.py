@@ -15,6 +15,9 @@ def on_load(server: PluginServerInterface, prev_module):
     rt.psi = server if not rt.psi else rt.psi
     server.logger.info(tr(server, "mcdr.on_load"))
     rt.cfg = config_loader(server)
+    if not rt.cfg.enable:
+        server.logger.error(tr(server, "mcdr.error_check_config"))
+        server.unload_plugin(server.get_self_metadata().id)
     server.logger.info(tr(server, "mcdr.on_start"))
     if server.is_server_startup():
         on_server_startup(server)

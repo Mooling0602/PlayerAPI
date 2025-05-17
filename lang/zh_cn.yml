@@ -1,4 +1,5 @@
 player_api:
   mcdr:
+    error_check_config: 未在配置中启用插件，将自动卸载！
     on_load: PlayerAPI 正在使用 MCDR API 进行初始化……
     on_start: 插件配置已加载，开始工作！
