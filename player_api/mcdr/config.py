@@ -1,6 +1,4 @@
-"""player_api.mcdr.config
-
-Config module for MCDR plugin workaround.
+"""Config module for MCDR plugin workaround.
 """
 from mcdreforged.api.utils import Serializable
 from mcdreforged.api.types import PluginServerInterface
@@ -11,26 +9,38 @@ class OnlineModules(Serializable):
 
     Args:
         matcher (bool): Matching various player information feature.
-            Default to False (to disable).
+
+            Default to `False` (to disable).
+
         counter (bool): Online player count feature.
-            Default to False (to disable).
+
+            Default to `False` (to disable).
+
         timer (bool): Online time statistics feature.
-            Default to False (to disable).
+
+            Default to `False` (to disable).
+
     """
-    matcher: bool = False  # 匹配各种玩家信息
-    counter: bool = False  # 在线人数获取
-    timer: bool = False  # 在线时间统计
+    matcher: bool = False
+    counter: bool = False
+    timer: bool = False
 
 
 class PluginModules(Serializable):
     """Plugin config options for modules.
 
     Args:
+
         online (OnlineModules): Whether to enable online modules.
+
         binder (bool): Custom player ID feature.
-            Default to False (to disable).
+
+            Default to `False` (to disable).
+
         ip_logger (bool): Player IP logging feature.
-            Default to False (to disable).
+
+            Default to `False` (to disable).
+
     """
     online: OnlineModules = OnlineModules()
     binder: bool = False
@@ -44,7 +54,9 @@ class PluginConfig(Serializable):
 
     Args:
         enable (bool): Whether the plugin is enabled.
+
         modules (PluginModules): Whether the modules to be loaded.
+
     """
     enable: bool = False  # * Disable the plugin by default.
     modules: PluginModules = PluginModules()

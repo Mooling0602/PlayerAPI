@@ -1,6 +1,4 @@
-"""player_api.utils
-
-Utility functions for PlayerAPI.
+"""Utility functions for PlayerAPI.
 """
 import locale
 
@@ -35,7 +33,7 @@ def get_time(return_str: Optional[bool]) -> datetime | str:
 
     Args:
         return_str (Optional[bool]): \
-            Return a string result instead of a datetime instance or not.
+Return a string result instead of a datetime instance or not.
 
     Returns:
         datetime | str: Result of the time.
@@ -51,9 +49,11 @@ def get_time_styled(locale_code: Optional[str]) -> str:
 
     Args:
         locale_code (Optional[str]): Set the locale code \
-            if you want to get the result in the specified locale.
+if you want to get the result in the specified locale.
+
             Supported locale codes:
                 - zh_cn (Chinese)
+
             Unsupported locale codes will fallback to English result.
 
     Returns:
@@ -71,7 +71,8 @@ def format_time(time: datetime | str, locale_code: Optional[str]) -> str:
 
     Args:
         time (datetime | str): String time or datetime instance.
-        locale_code (Optional[str]): See `get_time_styled()`.
+        locale_code (Optional[str]): See [`get_time_styled()`]\
+(#player_api.utils.get_time_styled).
 
     Returns:
         str: Text time result that is readable.

@@ -1,5 +1,5 @@
 """PlayerAPI - A Python lib and a MCDReforged plugin \
-    for querying and managing Minecraft player information.
+for querying and managing Minecraft player information.
 """
 from dataclasses import dataclass, field
 from enum import StrEnum, auto
@@ -12,8 +12,7 @@ from pydantic import HttpUrl
 
 
 class ServiceType(StrEnum):
-    """
-    The type of service.
+    """The type of service.
     """
     OFFLINE = auto()
     MOJANG = auto()
@@ -25,13 +24,13 @@ def is_from_floodgate(uuid: Optional[UUID]) -> bool:
     """Check if the UUID is from Floodgate.
 
     Floodgate player's UUID is prefixed with "00000000", \
-        so we can check if it is.
+so we can check if it is.
 
     Args:
         uuid (Optional[UUID]): The UUID to check.
 
     Returns:
-        bool: True if the UUID is from Floodgate, False otherwise.
+        bool: `True` if the UUID is from Floodgate, `False` otherwise.
     """
     if uuid:
         if str(uuid).startswith("00000000"):
@@ -47,12 +46,12 @@ class Player:
 
     Args:
         name (Optional[str]): Player name, used in \
-            vanilla chat format and logs, commands, etc.
+vanilla chat format and logs, commands, etc.
         uuid (Optional[UUID]): UUID of the player.
         online_mode (Optional[bool]): \
-            Whether the player is in online mode or not.
+Whether the player is in online mode or not.
         official_account (Optional[bool]): \
-            Whether the player's account has been verified by Mojang/Microsoft.
+Whether the player's account has been verified by Mojang/Microsoft.
         api (Optional[HttpUrl|str]): Login service API address.
         service_name (Optional[str]): Login service name.
 
@@ -79,21 +78,29 @@ class Player:
 class OfflinePlayer(Player):
     """Offline player class.
 
-    Missing attributes see class `Player`.
+    Missing attributes see class [`Player`](#player_api.Player).
 
     Args:
         online_mode (Optional[bool]): Force the player to be offline mode.
-            Defaults to False.
+
+            Defaults to `False`.
+
         official_account (Optional[bool]): \
-            Force the player's account hasn't been verified by \
-                Mojang/Microsoft.
-            Defaults to False.
+Force the player's account hasn't been verified by \
+Mojang/Microsoft.
+
+            Defaults to `False`.
+
         api (Optional[HttpUrl]): \
-            Force the login service's api address to be empty.
-            Defaults to None.
+Force the login service's api address to be empty.
+
+            Defaults to `None`.
+
         service_name (Optional[str]): \
-            Force the login service's name to be "offline".
+Force the login service's name to be "offline".
+
             Defaults to "offline".
+
     """
     online_mode: Optional[bool] = field(default=False, init=False)
     official_account: Optional[bool] = field(default=False, init=False)
@@ -105,10 +112,12 @@ class OfflinePlayer(Player):
 class OnlinePlayer(Player):
     """Online player class.
 
-    Missing attributes see class `Player`.
+    Missing attributes see class [`Player`](#player_api.Player).
 
     Args:
-        online_mode (Optional[bool]): Whether the player is online.
+        online_mode (Optional[bool]): Force the player is in online mode.
+
+            Defaults to `True`.
     """
     online_mode: Optional[bool] = field(default=True, init=False)
 
@@ -117,13 +126,22 @@ class OnlinePlayer(Player):
 class OfficialPlayer(OnlinePlayer):
     """Official player class.
 
-    Missing attributes see class `Player`.
+    Missing attributes see class [`Player`](#player_api.Player).
 
     Args:
         official_account (Optional[bool]): \
-            Force the player's account has been verified by Mojang/Microsoft.
+Force the player's account has been verified by Mojang/Microsoft.
+
+            Defaults to `True`.
+
         api (Optional[HttpUrl|str]): Force to use the official API URL.
+
+            Defaults to \
+`HttpUrl("https://api.mojang.com/users/profiles/minecraft/")`.
+
         service_name (Optional[str]): Force to be "mojang".
+
+            Defaults to "mojang".
 
     Raises:
         TypeError: If a floodgate player's UUID detected.
@@ -157,13 +175,18 @@ class OfficialPlayer(OnlinePlayer):
 class YggdrasilPlayer(OnlinePlayer):
     """Yggdrasil player class.
 
-    Missing attributes see class `Player`.
+    Missing attributes see class [`Player`](#player_api.Player).
 
     Args:
         official_account (Optional[bool]): \
-            Force the player's account hasn't been verified \
-                by Mojang/Microsoft.
+Force the player's account hasn't been verified \
+by Mojang/Microsoft.
+
+            Defaults to `False`.
+
         service_name (Optional[str]): Force to be "yggdrasil".
+
+            Defaults to "yggdrasil".
 
     Raises:
         TypeError: If not provided yggdrasil api address.
@@ -188,11 +211,15 @@ class YggdrasilPlayer(OnlinePlayer):
 class FloodgatePlayer(OnlinePlayer):
     """Floodgate player class.
 
+    Missing attributes see class [`Player`](#player_api.Player).
+
     Args:
         official_account (Optional[bool]): \
             Because unable to check if a bedrock player has bought the game, \
             so force the player's account hasn't been verified \
                 by Mojang/Microsoft.
+
+            Defaults to `False`.
 
     Raises:
         TypeError: If the uuid mismatches the player's type.

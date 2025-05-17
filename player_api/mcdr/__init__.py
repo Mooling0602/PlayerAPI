@@ -1,6 +1,4 @@
-"""player_api.mcdr
-
-MCDR plugin entrypoint.
+"""MCDR plugin entrypoint.
 """
 from mcdreforged.api.all import PluginServerInterface
 from player_api.utils import execute_if
@@ -9,7 +7,7 @@ from player_api.mcdr.config import config_loader
 import player_api.mcdr.runtime as rt
 
 
-def on_load(server: PluginServerInterface, prev_module) -> None:
+def on_load(server: PluginServerInterface, prev_module):
     """Called when the plugin is loaded.
     """
     prev_module = None if not prev_module else prev_module

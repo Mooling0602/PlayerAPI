@@ -1,18 +1,18 @@
-"""player_api.mcdr.runtime
-
-Runtime module for MCDR plugin workaround.
+"""Runtime module for MCDR plugin workaround.
 """
 from mcdreforged.api.types import PluginServerInterface
 from .config import PluginConfig
 
 
 cfg: PluginConfig = None  # type: ignore
-"""PluginConfig instance.
+"""[`PluginConfig`](#player_api.mcdr.config.PluginConfig) global instance.
 
-This is used to access the plugin configuration.
+This is used to store the plugin configuration and provide the access of it.
 """
 psi: PluginServerInterface = None  # type: ignore
-"""PluginServerInterface instance for MCDR plugin.
+"""[`PluginServerInterface`]\
+(https://docs.mcdreforged.com/en/latest/code_references/PluginServerInterface.html)\
+ instance for MCDR plugin.
 
-This is used to access the psi instance and its methods.
+This is used to access the mcdr plugin server interface and its methods.
 """
