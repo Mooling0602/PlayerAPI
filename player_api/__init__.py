@@ -27,10 +27,13 @@ def is_from_floodgate(uuid: Optional[UUID]) -> bool:
 so we can check if it is.
 
     Args:
+
         uuid (Optional[UUID]): The UUID to check.
 
     Returns:
+
         bool: `True` if the UUID is from Floodgate, `False` otherwise.
+
     """
     if uuid:
         if str(uuid).startswith("00000000"):
@@ -47,16 +50,22 @@ class Player:
     Args:
         name (Optional[str]): Player name, used in \
 vanilla chat format and logs, commands, etc.
+
         uuid (Optional[UUID]): UUID of the player.
+
         online_mode (Optional[bool]): \
 Whether the player is in online mode or not.
+
         official_account (Optional[bool]): \
 Whether the player's account has been verified by Mojang/Microsoft.
+
         api (Optional[HttpUrl|str]): Login service API address.
+
         service_name (Optional[str]): Login service name.
 
     Raises:
         TypeError: If no necessary arguments are provided.
+
     """
     name: Optional[str] = None
     uuid: Optional[UUID] = None
@@ -118,6 +127,7 @@ class OnlinePlayer(Player):
         online_mode (Optional[bool]): Force the player is in online mode.
 
             Defaults to `True`.
+
     """
     online_mode: Optional[bool] = field(default=True, init=False)
 
@@ -145,6 +155,7 @@ Force the player's account has been verified by Mojang/Microsoft.
 
     Raises:
         TypeError: If a floodgate player's UUID detected.
+
     """
     official_account: Optional[bool] = field(default=True, init=False)
     # if you want to modify it, plz keep the same format.
@@ -190,6 +201,7 @@ by Mojang/Microsoft.
 
     Raises:
         TypeError: If not provided yggdrasil api address.
+
     """
     official_account: Optional[bool] = field(default=False, init=False)
     service_name: Optional[str] = ServiceType.YGGDRASIL
@@ -223,6 +235,7 @@ class FloodgatePlayer(OnlinePlayer):
 
     Raises:
         TypeError: If the uuid mismatches the player's type.
+
     """
     official_account: Optional[bool] = field(default=False, init=False)
 
