@@ -21,7 +21,7 @@ def on_load(server: PluginServerInterface, prev_module):
 
 
 # MCDR Default Listener
-@execute_if(lambda: rt.cfg.modules.online.counter is True)
+@execute_if(lambda: (rt.cfg.modules.online.counter and rt.cfg.enable) is True)
 def on_server_startup(server: PluginServerInterface):
     """Called when the server is startup.
     """
