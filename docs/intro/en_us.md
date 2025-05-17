@@ -1,0 +1,1 @@
+An api to identify players in Minecraft servers.
