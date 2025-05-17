@@ -3,6 +3,7 @@
 from mcdreforged.api.all import PluginServerInterface
 from player_api.utils import execute_if
 from player_api.mcdr.config import config_loader
+from player_api.mcdr.utils import tr
 
 import player_api.mcdr.runtime as rt
 
@@ -12,8 +13,11 @@ def on_load(server: PluginServerInterface, prev_module):
     """
     prev_module = None if not prev_module else prev_module
     rt.psi = server if not rt.psi else rt.psi
-    server.logger.info("PlayerAPI is loading with MCDR API.")
+    server.logger.info(tr(server, "mcdr.on_load"))
     rt.cfg = config_loader(server)
+    server.logger.info(tr(server, "mcdr.on_start"))
+    if server.is_server_startup():
+        on_server_startup(server)
 
 
 # MCDR Default Listener
