@@ -1,5 +1,5 @@
 from typing import Optional
-from mcdreforged.api.all import PluginServerInterface
+from mcdreforged.api.all import PluginServerInterface, RTextMCDRTranslation
 
 
 def tr(
