@@ -1,0 +1,4 @@
+player_api:
+  mcdr:
+    on_load: PlayerAPI 正在使用 MCDR API 进行初始化……
+    on_start: 插件配置已加载，开始工作！
