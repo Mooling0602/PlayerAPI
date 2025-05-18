@@ -17,12 +17,12 @@
   * [OnlineModules](#player_api.mcdr.config.OnlineModules)
   * [PluginModules](#player_api.mcdr.config.PluginModules)
   * [PluginConfig](#player_api.mcdr.config.PluginConfig)
-    * [enable](#player_api.mcdr.config.PluginConfig.enable)
   * [config\_loader](#player_api.mcdr.config.config_loader)
 * [player\_api.mcdr](#player_api.mcdr)
   * [on\_load](#player_api.mcdr.on_load)
   * [on\_server\_startup](#player_api.mcdr.on_server_startup)
 * [player\_api.mcdr.utils](#player_api.mcdr.utils)
+  * [tr](#player_api.mcdr.utils.tr)
 * [player\_api.mcdr.modules.binder](#player_api.mcdr.modules.binder)
 * [player\_api.mcdr.modules.online](#player_api.mcdr.modules.online)
 * [player\_api.utils](#player_api.utils)
@@ -61,11 +61,13 @@ Floodgate player's UUID is prefixed with "00000000", so we can check if it is.
 
 **Arguments**:
 
+  
 - `uuid` _Optional[UUID]_ - The UUID to check.
   
 
 **Returns**:
 
+  
 - `bool` - `True` if the UUID is from Floodgate, `False` otherwise.
 
 <a id="player_api.Player"></a>
@@ -84,10 +86,15 @@ Any subclass based on this class should have the following attributes.
 **Arguments**:
 
 - `name` _Optional[str]_ - Player name, used in vanilla chat format and logs, commands, etc.
+  
 - `uuid` _Optional[UUID]_ - UUID of the player.
+  
 - `online_mode` _Optional[bool]_ - Whether the player is in online mode or not.
+  
 - `official_account` _Optional[bool]_ - Whether the player's account has been verified by Mojang/Microsoft.
+  
 - `api` _Optional[HttpUrl|str]_ - Login service API address.
+  
 - `service_name` _Optional[str]_ - Login service name.
   
 
@@ -330,13 +337,9 @@ Root nodes of the config options.
 
 - `enable` _bool_ - Whether the plugin is enabled.
   
+  Default to `False` (to disable).
+  
 - `modules` _PluginModules_ - Whether the modules to be loaded.
-
-<a id="player_api.mcdr.config.PluginConfig.enable"></a>
-
-#### enable
-
-* Disable the plugin by default.
 
 <a id="player_api.mcdr.config.config_loader"></a>
 
@@ -369,7 +372,7 @@ Called when the plugin is loaded.
 #### on\_server\_startup
 
 ```python
-@execute_if(lambda: rt.cfg.modules.online.counter is True)
+@execute_if(lambda: (rt.cfg.modules.online.counter and rt.cfg.enable) is True)
 def on_server_startup(server: PluginServerInterface)
 ```
 
@@ -378,6 +381,38 @@ Called when the server is startup.
 <a id="player_api.mcdr.utils"></a>
 
 # player\_api.mcdr.utils
+
+Utility functions for MCDR plugin development.
+
+<a id="player_api.mcdr.utils.tr"></a>
+
+#### tr
+
+```python
+def tr(server: PluginServerInterface,
+       key: str,
+       to_str: Optional[bool] = None,
+       **kwargs) -> RTextMCDRTranslation | str
+```
+
+Translate the key to the language of the server.
+
+**Arguments**:
+
+- `server` _PluginServerInterface_ - The server instance.
+  
+- `key` _str_ - The key to translate.
+  
+- `to_str` _bool, optional_ - Whether to convert the result to string.
+  
+  Default to `None` (to disable).
+  
+- `**kwargs` - Additional arguments for translation.
+  
+
+**Returns**:
+
+  RTextMCDRTranslation | str: The translated text.
 
 <a id="player_api.mcdr.modules.binder"></a>
 
@@ -403,7 +438,8 @@ def execute_if(condition: bool | Callable[[], bool])
 
 Add a decorator to execute a function only if a condition is met.
 
-Usage: add `@execute_if(bool | Callable -> bool)` line before the function.
+Usage:
+add `@execute_if(bool | Callable -> bool)` line before the function.
 
 **Arguments**:
 
@@ -465,6 +501,7 @@ Format string time or datetime instance to readable text.
 **Arguments**:
 
 - `time` _datetime | str_ - String time or datetime instance.
+  
 - `locale_code` _Optional[str]_ - See [`get_time_styled()`](#player_api.utils.get_time_styled).
   
 

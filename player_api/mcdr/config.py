@@ -55,10 +55,12 @@ class PluginConfig(Serializable):
     Args:
         enable (bool): Whether the plugin is enabled.
 
+            Default to `False` (to disable).
+
         modules (PluginModules): Whether the modules to be loaded.
 
     """
-    enable: bool = False  # * Disable the plugin by default.
+    enable: bool = False
     modules: PluginModules = PluginModules()
 
 

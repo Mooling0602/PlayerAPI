@@ -9,7 +9,8 @@ from datetime import datetime, timezone
 def execute_if(condition: bool | Callable[[], bool]):
     """Add a decorator to execute a function only if a condition is met.
 
-    Usage: add `@execute_if(bool | Callable -> bool)` line before the function.
+    Usage:
+        add `@execute_if(bool | Callable -> bool)` line before the function.
 
     Args:
         condition (bool | Callable[[], bool]): Condition to check.
@@ -71,6 +72,7 @@ def format_time(time: datetime | str, locale_code: Optional[str]) -> str:
 
     Args:
         time (datetime | str): String time or datetime instance.
+
         locale_code (Optional[str]): See [`get_time_styled()`]\
 (#player_api.utils.get_time_styled).
 
